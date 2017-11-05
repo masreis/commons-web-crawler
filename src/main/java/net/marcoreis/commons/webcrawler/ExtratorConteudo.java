@@ -9,18 +9,23 @@ import org.jsoup.select.Elements;
 public class ExtratorConteudo {
 	private static final Logger logger =
 			Logger.getLogger(ExtratorConteudo.class);
-	private String pagina;
+	Document documento;
 
 	public ExtratorConteudo(String pagina) {
-		this.pagina = pagina;
+		documento = Jsoup.parse(pagina);
 	}
 
 	public void extrairDadosHead() {
-		Document documento = Jsoup.parse(pagina);
 		Element head = documento.head();
 		Elements elementos = head.children();
 		for (Element elemento : elementos) {
 			logger.info(elemento.tag());
 		}
+	}
+
+	public void extrairConteudoPrincipal() {
+		Element body = documento.body();
+		Element main = body.getElementById("main");
+		logger.info(main.text());
 	}
 }

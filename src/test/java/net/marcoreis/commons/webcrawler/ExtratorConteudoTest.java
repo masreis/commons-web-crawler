@@ -7,17 +7,17 @@ import java.util.List;
 import org.junit.Test;
 
 public class ExtratorConteudoTest {
+	private NutchParser parser = new NutchParser();
+	private File arquivoDump = new File(
+			"/home/marco/software/apache-nutch-1.13/crawl/dump-conteudo/dump");
 
 	@Test
 	public void testExtrator() throws IOException {
-		NutchParser parser = new NutchParser();
-		File arquivoDump = new File(
-				"/home/marco/software/apache-nutch-1.13/crawl/dump-conteudo/dump");
 		List<DumpNutchVO> lista = parser.parse(arquivoDump);
 		for (DumpNutchVO vo : lista) {
 			ExtratorConteudo extrator =
 					new ExtratorConteudo(vo.getContent());
-			extrator.extrairDadosHead();
+			extrator.extrairConteudoPrincipal();
 		}
 	}
 }
