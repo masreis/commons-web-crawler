@@ -1,4 +1,4 @@
-package net.marcoreis.commons_web_crawler;
+package net.marcoreis.commons.webcrawler;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import net.marcoreis.commons.webcrawler.index.DumpNutchVO;
-import net.marcoreis.commons.webcrawler.index.NutchParser;
+import net.marcoreis.commons.webcrawler.DumpNutchVO;
+import net.marcoreis.commons.webcrawler.NutchParser;
 
 public class NutchParserTest {
 

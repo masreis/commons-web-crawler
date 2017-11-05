@@ -1,4 +1,4 @@
-package net.marcoreis.commons.webcrawler.index;
+package net.marcoreis.commons.webcrawler;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class IndexadorNutch {
 	protected IndexWriter writer;
 	private Directory diretorio;
 	private String diretorioIndice;
-	private String diretorioSegmento;
+	// private String diretorioSegmento;
 	protected long totalUrlsIndexadas;
 	private boolean apagarIndice;
 
@@ -109,8 +109,8 @@ public class IndexadorNutch {
 		this.diretorioIndice = diretorioIndice;
 	}
 
-	public void setDiretorioSegmento(String diretorioSegmento) {
-		this.diretorioSegmento = diretorioSegmento;
-	}
+	// public void setDiretorioSegmento(String diretorioSegmento) {
+	// this.diretorioSegmento = diretorioSegmento;
+	// }
 
 }

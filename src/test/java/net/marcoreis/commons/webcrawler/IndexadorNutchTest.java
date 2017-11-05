@@ -1,10 +1,10 @@
-package net.marcoreis.commons_web_crawler;
+package net.marcoreis.commons.webcrawler;
 
 import java.io.File;
 
 import org.junit.Test;
 
-import net.marcoreis.commons.webcrawler.index.IndexadorNutch;
+import net.marcoreis.commons.webcrawler.IndexadorNutch;
 
 public class IndexadorNutchTest {
 
