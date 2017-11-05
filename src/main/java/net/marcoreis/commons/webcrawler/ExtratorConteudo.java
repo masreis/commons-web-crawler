@@ -20,7 +20,7 @@ public class ExtratorConteudo {
 		Element head = documento.head();
 		Elements elementos = head.children();
 		for (Element elemento : elementos) {
-			logger.info(elemento);
+			logger.info(elemento.tag());
 		}
 	}
 }
