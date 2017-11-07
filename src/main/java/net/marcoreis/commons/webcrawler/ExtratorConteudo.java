@@ -26,6 +26,11 @@ public class ExtratorConteudo {
 	public void extrairConteudoPrincipal() {
 		Element body = documento.body();
 		Element main = body.getElementById("main");
+		Elements categorias = body.getElementsByAttribute("rel");
+		logger.info(categorias.size());
+		for (Element e : categorias) {
+			logger.info(e.val());
+		}
 		logger.info(main.text());
 	}
 }

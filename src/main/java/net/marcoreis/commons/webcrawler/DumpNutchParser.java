@@ -12,9 +12,9 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
-public class NutchParser {
+public class DumpNutchParser {
 	private static final Logger logger =
-			Logger.getLogger(NutchParser.class);
+			Logger.getLogger(DumpNutchParser.class);
 
 	public List<DumpNutchVO> parse(File arquivoDump)
 			throws IOException {

@@ -7,9 +7,9 @@ import java.util.List;
 import org.junit.Test;
 
 public class ExtratorConteudoTest {
-	private NutchParser parser = new NutchParser();
+	private DumpNutchParser parser = new DumpNutchParser();
 	private File arquivoDump = new File(
-			"/home/marco/software/apache-nutch-1.13/crawl/dump-conteudo/dump");
+			"/home/marco/software/apache-nutch-1.13/crawlmr/dump-conteudo/dump");
 
 	@Test
 	public void testExtrator() throws IOException {
