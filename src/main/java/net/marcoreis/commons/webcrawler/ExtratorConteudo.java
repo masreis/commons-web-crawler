@@ -1,5 +1,7 @@
 package net.marcoreis.commons.webcrawler;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,46 +21,54 @@ public class ExtratorConteudo {
 		documento = Jsoup.parse(conteudoHtml);
 	}
 
+	public void carregarConteudoHtml(URL url)
+			throws IOException {
+		int timeout_cinco_segundos = 5000;
+		documento = Jsoup.parse(url, timeout_cinco_segundos);
+	}
+
 	public void extraiConteudoHead() {
 		Element head = documento.head();
 		Elements elementos = head.children();
 		for (Element elemento : elementos) {
 			logger.info(elemento.tagName());
-			// if (!elemento.tag().isEmpty()) {
-			// }
-			if (elemento.tag().isData()) {
+			if (elemento.hasText()) {
+				logger.info("Text: " + elemento.text());
+			} else if (elemento.data().length() > 0) {
 				logger.info("Data: " + elemento.data());
 			} else {
-				logger.info(elemento.hasText());
-				logger.info("Text: " + elemento.text());
-				logger.info("Val: " + elemento.val());
-				logger.info("Elemento: " + elemento);
-				logger.info(elemento.tag().isData());
-				logger.info(elemento.tag().isBlock());
-				logger.info(elemento.tag().isEmpty());
-				logger.info(elemento.tag().isInline());
+				logger.info(elemento);
 			}
 			logger.info("================");
-			// }
 		}
 	}
 
-	public void extraiConteudoPrincipal() {
+	public String extraiConteudoPrincipalBlog() {
 		Element body = documento.body();
-		Element main = body.getElementById("main");
-		Elements categorias = main.getElementsByAttributeValue(
-				"rel", "category tag");
-		logger.info(categorias.size());
-		for (Element e : categorias) {
-			logger.info(e.text());
+		Elements entryContent =
+				body.getElementsByClass("entry-content");
+		if (entryContent != null && entryContent.hasText()) {
+			return entryContent.text();
+		} else {
+			return null;
 		}
 	}
 
-	public Set<String> extraiCategorias(
+	public String extraiConteudoPrincipalWikipedia() {
+		Element body = documento.body();
+		Element content = body.getElementById("content");
+		if (content != null && content.hasText()) {
+			return content.text();
+		} else {
+			return null;
+		}
+	}
+
+	public Set<String> extraiCategoriasBlog(
 			List<DumpNutchVO> listaVos) {
 		Set<String> lista = new HashSet<String>();
 		for (DumpNutchVO vo : listaVos) {
-			carregarConteudoHtml(vo.getContent());
+			carregarConteudoHtml(new String(vo.getContent()));
 			Element body = documento.body();
 			Element main = body.getElementById("main");
 			if (main == null) {
@@ -67,6 +77,26 @@ public class ExtratorConteudo {
 			Elements categorias =
 					main.getElementsByAttributeValue("rel",
 							"category tag");
+			for (Element e : categorias) {
+				lista.add(e.text());
+			}
+		}
+		return lista;
+	}
+
+	public Set<String> extraiCategoriasWikipedia(
+			List<DumpNutchVO> listaVos) {
+		Set<String> lista = new HashSet<String>();
+		for (DumpNutchVO vo : listaVos) {
+			carregarConteudoHtml(new String(vo.getContent()));
+			Element body = documento.body();
+			Element content = body.getElementById("content");
+			if (content == null) {
+				continue;
+			}
+			Elements categorias =
+					content.getElementsByAttributeValueStarting(
+							"href", "/wiki/Categoria");
 			for (Element e : categorias) {
 				lista.add(e.text());
 			}

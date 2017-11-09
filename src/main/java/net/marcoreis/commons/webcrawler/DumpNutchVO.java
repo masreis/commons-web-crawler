@@ -1,40 +1,40 @@
 package net.marcoreis.commons.webcrawler;
 
 public class DumpNutchVO {
-	private String url;
-	private String content;
-	private String contentType;
-	private String metadata;
+	private byte[] url;
+	private byte[] content;
+	private byte[] contentType;
+	private byte[] metadata;
 
-	public String getUrl() {
+	public byte[] getUrl() {
 		return url;
 	}
 
-	public void setUrl(String url) {
+	public void setUrl(byte[] url) {
 		this.url = url;
 	}
 
-	public String getContent() {
+	public byte[] getContent() {
 		return content;
 	}
 
-	public void setContent(String content) {
+	public void setContent(byte[] content) {
 		this.content = content;
 	}
 
-	public void setContentType(String contentType) {
+	public void setContentType(byte[] contentType) {
 		this.contentType = contentType;
 	}
 
-	public String getContentType() {
+	public byte[] getContentType() {
 		return contentType;
 	}
 
-	public void setMetadata(String metadata) {
+	public void setMetadata(byte[] metadata) {
 		this.metadata = metadata;
 	}
 
-	public String getMetadata() {
+	public byte[] getMetadata() {
 		return metadata;
 	}
 }
