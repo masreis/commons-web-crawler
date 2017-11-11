@@ -16,7 +16,6 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-import org.apache.tika.exception.TikaException;
 
 public class IndexadorNutch {
 	private static final Logger logger =
@@ -57,15 +56,6 @@ public class IndexadorNutch {
 		indexarArquivo(arquivo);
 	}
 
-	/**
-	 * Indexa o arquivo informado no parâmetro. Utiliza o Apache Tika para fazer
-	 * a extração dos dados.
-	 * 
-	 * @param arquivo
-	 *            Arquivo binário que será indexado
-	 * @throws TikaException
-	 * @throws IOException
-	 */
 	public void indexarArquivo(File arquivo) {
 		try {
 			Date dataModificacao =
@@ -89,16 +79,6 @@ public class IndexadorNutch {
 		writer.addDocument(doc);
 		logger.info("Conteúdo indexado");
 		totalUrlsIndexadas++;
-	}
-
-	protected String consultarExtensaoArquivo(String nome) {
-		int posicaoDoPonto = nome.lastIndexOf('.');
-		if (posicaoDoPonto > 1) {
-			return nome
-					.substring(posicaoDoPonto + 1, nome.length())
-					.toLowerCase();
-		}
-		return "";
 	}
 
 	public void setApagarIndice(boolean apagarIndice) {

@@ -12,7 +12,7 @@ public class ExtratorConteudoURLTest {
 			throws MalformedURLException, IOException {
 		ExtratorConteudo extrator = new ExtratorConteudo();
 		String spec = "http://pt.wikipedia.org";
-		extrator.carregarConteudoHtml(new URL(spec));
+		extrator.carregaConteudoHtml(new URL(spec));
 		extrator.extraiConteudoHead();
 	}
 }

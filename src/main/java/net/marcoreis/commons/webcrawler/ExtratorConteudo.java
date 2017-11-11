@@ -17,12 +17,11 @@ public class ExtratorConteudo {
 			Logger.getLogger(ExtratorConteudo.class);
 	private Document documento;
 
-	public void carregarConteudoHtml(String conteudoHtml) {
+	public void carregaConteudoHtml(String conteudoHtml) {
 		documento = Jsoup.parse(conteudoHtml);
 	}
 
-	public void carregarConteudoHtml(URL url)
-			throws IOException {
+	public void carregaConteudoHtml(URL url) throws IOException {
 		int timeout_cinco_segundos = 5000;
 		documento = Jsoup.parse(url, timeout_cinco_segundos);
 	}
@@ -68,7 +67,7 @@ public class ExtratorConteudo {
 			List<DumpNutchVO> listaVos) {
 		Set<String> lista = new HashSet<String>();
 		for (DumpNutchVO vo : listaVos) {
-			carregarConteudoHtml(new String(vo.getContent()));
+			carregaConteudoHtml(new String(vo.getContent()));
 			Element body = documento.body();
 			Element main = body.getElementById("main");
 			if (main == null) {
@@ -88,7 +87,7 @@ public class ExtratorConteudo {
 			List<DumpNutchVO> listaVos) {
 		Set<String> lista = new HashSet<String>();
 		for (DumpNutchVO vo : listaVos) {
-			carregarConteudoHtml(new String(vo.getContent()));
+			carregaConteudoHtml(new String(vo.getContent()));
 			Element body = documento.body();
 			Element content = body.getElementById("content");
 			if (content == null) {
@@ -96,8 +95,12 @@ public class ExtratorConteudo {
 			}
 			Elements categorias =
 					content.getElementsByAttributeValueStarting(
-							"href", "/wiki/Categoria");
+							"href", "/wiki/Categoria:");
 			for (Element e : categorias) {
+				// O símbolo ! indica uma categoria oculta
+				if (e.text().contains("!")) {
+					continue;
+				}
 				lista.add(e.text());
 			}
 		}

@@ -27,7 +27,7 @@ public class ExtratorConteudoWikipediaTest {
 	public void testExtraiConteudoHead() {
 		for (DumpNutchVO vo : listaVos) {
 			ExtratorConteudo extrator = new ExtratorConteudo();
-			extrator.carregarConteudoHtml(
+			extrator.carregaConteudoHtml(
 					new String(vo.getContent()));
 			extrator.extraiConteudoHead();
 		}
@@ -37,7 +37,7 @@ public class ExtratorConteudoWikipediaTest {
 	public void testExtraiConteudoPrincipalWikipedia() {
 		for (DumpNutchVO vo : listaVos) {
 			ExtratorConteudo extrator = new ExtratorConteudo();
-			extrator.carregarConteudoHtml(
+			extrator.carregaConteudoHtml(
 					new String(vo.getContent()));
 			String conteudo =
 					extrator.extraiConteudoPrincipalWikipedia();
